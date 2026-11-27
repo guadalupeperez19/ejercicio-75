@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 75 - Scripts package.json</title>
+    <style>
+        body { font-family: sans-serif; padding: 24px; }
+        button { padding: 8px 14px; margin-right: 8px; cursor: pointer; }
+        pre { background: #f3f4f6; padding: 14px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 75: Scripts en package.json</h1>
+    <pre id="json-pkg"></pre>
+    <button onclick="correrScript('start')">Ejecutar npm start</button>
+    <button onclick="correrScript('bienvenida')">Ejecutar npm run bienvenida</button>
+    <p id="salida-script"></p>
+
+    <script>
+        const pkg = {
+            name: "servidor-practica-75",
+            version: "1.0.0",
+            main: "server.js",
+            scripts: {
+                start: "node server.js",
+                bienvenida: "node -e \"console.log('¡Bienvenida al sistema!')\""
+            }
+        };
+
+        document.getElementById("json-pkg").textContent = JSON.stringify(pkg, null, 2);
+
+        function correrScript(nombreScript) {
+            const mensajes = {
+                start: "Sistema operativo y escuchando desde server.js (npm start).",
+                bienvenida: "¡Bienvenida al sistema! Ejecutado con npm run bienvenida."
+            };
+            const texto = mensajes[nombreScript] || "Script no encontrado.";
+            document.getElementById("salida-script").textContent = texto;
+            console.log(texto);
+        }
+    </script>
+</body>
+</html>
